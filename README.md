@@ -1,70 +1,96 @@
-# Getting Started with Create React App
+# Teacher Management Interface
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, glassmorphism-style Teacher Management Interface built with React.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Live Demo
 
-### `npm start`
+[https://teacher-management-systen.netlify.app/](https://teacher-management-systen.netlify.app/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📹 Loom Video Walkthrough
 
-### `npm test`
+[Loom Video: Code Walkthrough, Features, and Design Decisions](https://www.loom.com/share/cd3522d9cf0c4e8a9b4b717be1f3f5af?sid=09860544-62d0-4530-bdc8-25af230de1f0)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 📦 Repository
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[GitHub: OmPawar1343/Teacher-Management-Interface](https://github.com/OmPawar1343/Teacher-Management-Interface)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🛠️ Setup & Installation
 
-### `npm run eject`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/OmPawar1343/Teacher-Management-Interface.git
+   cd Teacher-Management-Interface
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## ✨ Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Responsive, dark-themed UI with glassmorphism
+- Animated welcome splash (BlurText + framer-motion)
+- Manage teachers, students, classes, attendance, reports, schedules
+- Live updates using LocalStorage
+- Draggable, glassy modals and scrollable tables
+- Hamburger menu for mobile navigation
+- Custom scrollbars, smooth transitions
+- Helper text and labels for clarity
+- Real-time class student counts
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🎨 Design Decisions & Rationale
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Glassmorphism** for modern, clean look
+- **Dark theme** for eye comfort and style
+- **Framer-motion** for smooth, engaging animations
+- **LocalStorage** for live, persistent data without backend
+- **Responsive layouts** for all devices
+- **Reusable components** for maintainability
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 📝 Assumptions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- No backend: all data is stored in LocalStorage
+- User is an admin/teacher managing the system
+- All features are accessible from the sidebar
+- UI/UX is prioritized for clarity and ease of use
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📄 Submission Checklist
 
-### Making a Progressive Web App
+- [x] Complete codebase in GitHub repository
+- [x] Live demo deployed ([Netlify link](https://teacher-management-systen.netlify.app/))
+- [x] Loom video walkthrough ([Loom link](https://www.loom.com/share/cd3522d9cf0c4e8a9b4b717be1f3f5af?sid=09860544-62d0-4530-bdc8-25af230de1f0))
+- [x] Documentation (see above)
+- [x] All code committed and pushed
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 📬 How to Submit
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. Share this repository link: https://github.com/OmPawar1343/Teacher-Management-Interface
+2. Include the live demo URL: https://teacher-management-systen.netlify.app/
+3. Include the Loom video link: https://www.loom.com/share/cd3522d9cf0c4e8a9b4b717be1f3f5af?sid=09860544-62d0-4530-bdc8-25af230de1f0
+4. Ensure all code is committed and pushed
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For any questions, please refer to the Loom video or open an issue in the repository.

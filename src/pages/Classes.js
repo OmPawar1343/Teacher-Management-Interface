@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
 import Modal from '../components/Modal';
-import Papa from 'papaparse';
 
 const initialClasses = [
   { id: 1, subject: 'Mathematics', grade: '10', section: 'A', students: 32, teachers: [1] },
@@ -18,10 +17,7 @@ function Classes() {
   });
   const [modal, setModal] = useState(null); // 'add' | 'edit' | 'delete'
   const [selectedClass, setSelectedClass] = useState(null);
-  const [subject, setSubject] = useState('');
-  const [grade, setGrade] = useState('');
   const [search, setSearch] = useState('');
-  const fileInputRef = React.useRef();
 
   // Get live teachers from localStorage
   const teachers = (() => {

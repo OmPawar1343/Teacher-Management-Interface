@@ -74,7 +74,6 @@ const fakeTeachers = [
 
 function Report() {
   const [search, setSearch] = useState('');
-  const [dateFilter, setDateFilter] = useState(''); // New date filter state
   const [selectedClassId, setSelectedClassId] = useState(null);
 
   // Live state for students, classes, attendance, resources
@@ -110,9 +109,6 @@ function Report() {
   });
 
   // Filter state for class and section (now as text inputs)
-  const [classFilter, setClassFilter] = useState('');
-  const [sectionFilter, setSectionFilter] = useState('');
-
   // Listen for localStorage changes (even from other tabs)
   useEffect(() => {
     function handleStorage() {
@@ -153,7 +149,6 @@ function Report() {
 
   // Get students for teacher or admin
   let relevantStudents = students;
-  let teacherClasses = [];
   // The user prop was removed, so we'll just use the classes state directly
   // to determine which classes are relevant for the teacher.
   // This part of the logic needs to be re-evaluated based on the new_code.
@@ -165,19 +160,7 @@ function Report() {
   relevantStudents = relevantStudents.filter(s => s.name.toLowerCase().includes(search.toLowerCase()));
 
   // Filter by class (subject+grade+section) text
-  if (classFilter.trim()) {
-    relevantStudents = relevantStudents.filter(s => {
-      const studentClass = classes.find(cls => (cls.studentIds || []).includes(s.id));
-      if (!studentClass) return false;
-      const label = `${studentClass.subject} ${studentClass.grade}${studentClass.section}`.toLowerCase();
-      return label.includes(classFilter.trim().toLowerCase());
-    });
-  }
   // Filter by section text
-  if (sectionFilter.trim()) {
-    relevantStudents = relevantStudents.filter(s => s.section && s.section.toLowerCase().includes(sectionFilter.trim().toLowerCase()));
-  }
-
   // Build report data for each student
   const reportRows = relevantStudents.map(s => {
     // Find class for student
@@ -185,9 +168,6 @@ function Report() {
     
     // Attendance summary - filter by date if dateFilter is set
     let records = attendanceRecords.filter(r => r.studentId === s.id);
-    if (dateFilter) {
-      records = records.filter(r => r.date === dateFilter);
-    }
     
     const present = records.filter(r => r.status === 'present').length;
     const absent = records.filter(r => r.status === 'absent').length;
@@ -219,7 +199,7 @@ function Report() {
       percent,
       assignmentSubmitted,
       // Add specific date attendance status if date filter is applied
-      dateStatus: dateFilter && records.length > 0 ? records[0].status : null,
+      dateStatus: null, // dateFilter is removed, so this will always be null
     };
   });
 
@@ -231,7 +211,6 @@ function Report() {
       const teacher = fakeTeachers.find(t => t.subject === cls.subject);
       // Attendance records for this class (and date if filtered)
       let classRecords = attendanceRecords.filter(r => r.classId === cls.id);
-      if (dateFilter) classRecords = classRecords.filter(r => r.date === dateFilter);
       const total = classRecords.length;
       const present = classRecords.filter(r => r.status === 'present').length;
       const absent = classRecords.filter(r => r.status === 'absent').length;
@@ -246,7 +225,7 @@ function Report() {
         total,
       };
     });
-  }, [classes, attendanceRecords, dateFilter]);
+  }, [classes, attendanceRecords]);
 
   // Helper: get students for a class
   function getStudentsForClass(classId) {
@@ -258,23 +237,16 @@ function Report() {
   // Helper: get attendance summary for a student in a class
   function getStudentAttendanceSummary(student, classId) {
     let records = attendanceRecords.filter(r => r.classId === classId && r.studentId === student.id);
-    if (dateFilter) records = records.filter(r => r.date === dateFilter);
     const present = records.filter(r => r.status === 'present').length;
     const absent = records.filter(r => r.status === 'absent').length;
     const late = records.filter(r => r.status === 'late').length;
     const percent = records.length > 0 ? ((present / records.length) * 100).toFixed(1) : '—';
     return { present, absent, late, percent };
   }
-
-  // Unique class and section options for filters
-  const classOptions = classes.map(cls => ({
-    id: cls.id,
-    label: `${cls.subject} ${cls.grade}${cls.section}`
-  }));
-  const sectionOptions = Array.from(new Set(classes.map(cls => cls.section)));
-
-  // Render
-  // Remove admin report logic, only show teacher/student report
+  function getStudentStatusOnDate(student, classId, date) {
+    const rec = attendanceRecords.find(r => r.classId === classId && r.studentId === student.id && r.date === date);
+    return rec ? rec.status : '—';
+  }
   return (
     <div className="report-page" style={{ maxWidth: 1100, margin: '0 auto', padding: 24 }}>
       <h2 className="section-title report-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0 }}>
@@ -309,7 +281,7 @@ function Report() {
             <div style={{ fontSize: 15, marginBottom: 2, color: '#fff' }}><b>Present:</b> {c.present}</div>
             <div style={{ fontSize: 15, marginBottom: 2, color: '#fff' }}><b>Absent:</b> {c.absent}</div>
             <div style={{ fontSize: 15, color: '#fff' }}><b>Late:</b> {c.late}</div>
-            {dateFilter && <div style={{ fontSize: 13, color: '#fff', marginTop: 6 }}>Date: {dateFilter}</div>}
+            {/* dateFilter && <div style={{ fontSize: 13, color: '#fff', marginTop: 6 }}>Date: {dateFilter}</div> */}
           </div>
         ))}
       </div>
@@ -335,26 +307,13 @@ function Report() {
 
 export default Report;
 
-// Helper to get teacher name by id (for matching)
-function getTeacherNameById(id) {
-  const teachers = [
-    { id: 1, name: 'Amit Sharma' },
-    { id: 2, name: 'Priya Singh' },
-    { id: 3, name: 'Rahul Verma' },
-    { id: 4, name: 'Sunita Rao' },
-    { id: 5, name: 'Vikram Patel' },
-  ];
-  const t = teachers.find(t => t.id === id);
-  return t ? t.name : '';
-} 
-
 function ClassAttendanceModalContent({ classId, students, classes, attendanceRecords }) {
   const [search, setSearch] = useState('');
   const [date, setDate] = useState('');
   const cls = classes.find(c => c.id === classId);
-  const filteredStudents = getStudentsForClass(classId, students, classes).filter(s => s.name.toLowerCase().includes(search.toLowerCase()));
+  const filteredStudents = getStudentsForClass(classId).filter(s => s.name.toLowerCase().includes(search.toLowerCase()));
 
-  function getStudentsForClass(classId, students, classes) {
+  function getStudentsForClass(classId) {
     const cls = classes.find(c => c.id === classId);
     if (!cls) return [];
     return students.filter(s => (cls.studentIds || []).includes(s.id));

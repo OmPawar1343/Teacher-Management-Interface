@@ -20,7 +20,7 @@ function Attendance() {
   });
 
   // Students for selected class
-  const [students, setStudents] = useState(() => {
+  const [students] = useState(() => {
     const saved = localStorage.getItem('students');
     return saved ? JSON.parse(saved) : initialStudents;
   });

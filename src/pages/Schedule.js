@@ -75,7 +75,7 @@ function Schedule() {
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [festivalModalOpen, setFestivalModalOpen] = useState(false);
   const [modal, setModal] = useState(null); // { event, mode: 'add'|'edit' }
-  const [selectedSlot, setSelectedSlot] = useState(null);
+  // Removed unused selectedSlot
 
   useEffect(() => {
     localStorage.setItem('schoolCalendarEvents', JSON.stringify(events));
@@ -83,7 +83,6 @@ function Schedule() {
 
   // Add event
   const handleSelectSlot = (slot) => {
-    setSelectedSlot(slot);
     setModal({ mode: 'add', event: {
       title: '',
       start: slot.start,
@@ -103,13 +102,11 @@ function Schedule() {
       setEvents(events.map(ev => ev.id === eventData.id ? eventData : ev));
     }
     setModal(null);
-    setSelectedSlot(null);
   };
   // Delete
   const handleDelete = (eventId) => {
     setEvents(events.filter(ev => ev.id !== eventId));
     setModal(null);
-    setSelectedSlot(null);
   };
   return (
     <div className="schedule-page" style={{ maxWidth: 1000, margin: '0 auto', padding: 24 }}>
@@ -217,7 +214,7 @@ function Schedule() {
           mode={modal.mode}
           onSave={handleSave}
           onDelete={handleDelete}
-          onClose={() => { setModal(null); setSelectedSlot(null); }}
+          onClose={() => { setModal(null); }}
         />
       )}
       {/* Festival Holidays Modal */}

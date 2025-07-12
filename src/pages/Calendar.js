@@ -67,14 +67,13 @@ function CalendarPage() {
     return initialEvents;
   });
   const [modal, setModal] = useState(null); // { event, mode: 'add'|'edit' }
-  const [selectedSlot, setSelectedSlot] = useState(null);
+  // Removed unused selectedSlot
 
   useEffect(() => {
     localStorage.setItem('calendarEvents', JSON.stringify(events));
   }, [events]);
 
   const handleSelectSlot = (slot) => {
-    setSelectedSlot(slot);
     setModal({ mode: 'add', event: {
       title: '',
       type: 'class',
@@ -88,7 +87,6 @@ function CalendarPage() {
   };
   const handleCloseModal = () => {
     setModal(null);
-    setSelectedSlot(null);
   };
   const handleSave = (eventData) => {
     if (modal.mode === 'add') {

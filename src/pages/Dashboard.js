@@ -1,32 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
-import Button from '../components/Button';
 
 function Dashboard({ onNavigate }) {
   // Live state for students, classes, events, subjects, messages
-  const [students, setStudents] = useState(() => {
+  const [students] = useState(() => {
     const saved = localStorage.getItem('students');
     return saved ? JSON.parse(saved) : [];
   });
-  const [classes, setClasses] = useState(() => {
+  const [classes] = useState(() => {
     const saved = localStorage.getItem('classes');
     return saved ? JSON.parse(saved) : [];
   });
-  const [events, setEvents] = useState(() => {
-    const saved = localStorage.getItem('events');
-    if (saved) return JSON.parse(saved);
-    return [
-      { id: 1, date: '2024-04-25', title: 'Science Fair', description: 'Science Fair' },
-      { id: 2, date: '2024-04-28', title: 'Math Exam', description: 'Math Exam' },
-      { id: 3, date: '2024-05-05', title: 'Field Trip', description: 'Field Trip' },
-    ];
-  });
-  const [messages, setMessages] = useState(() => {
-    const saved = localStorage.getItem('messages');
-    return saved ? JSON.parse(saved) : [];
-  });
-  const unreadMessages = messages.filter(m => m.read === false).length;
-  const [teachers, setTeachers] = useState(() => {
+  // Removed unused events
+  // Removed unused messages
+  const [teachers] = useState(() => {
     const saved = localStorage.getItem('teachers');
     return saved ? JSON.parse(saved) : [];
   });
@@ -72,18 +59,7 @@ function Dashboard({ onNavigate }) {
   }, []);
 
   // Demo notifications
-  const notifications = [
-    'New student registered',
-    'Class rescheduled',
-  ];
   // Remove demo studentPerformance, use real students
-  const [search, setSearch] = useState('');
-
-  // Helper to get class label for a student
-  function getClassLabel(student) {
-    const studentClass = classes.find(cls => cls.grade === student.grade && cls.section === student.section);
-    return studentClass ? `${studentClass.subject} ${studentClass.grade}${studentClass.section}` : `${student.grade}${student.section}`;
-  }
 
   return (
     <div className="dashboard-page" style={{ minHeight: '100vh', padding: 0, position: 'relative' }}>

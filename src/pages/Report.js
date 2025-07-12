@@ -158,49 +158,6 @@ function Report() {
   // Filter by class (subject+grade+section) text
   // Filter by section text
   // Build report data for each student
-  const reportRows = relevantStudents.map(s => {
-    // Find class for student
-    const studentClass = classes.find(cls => (cls.studentIds || []).includes(s.id));
-    
-    // Attendance summary - filter by date if dateFilter is set
-    let records = attendanceRecords.filter(r => r.studentId === s.id);
-    
-    const present = records.filter(r => r.status === 'present').length;
-    const absent = records.filter(r => r.status === 'absent').length;
-    const late = records.filter(r => r.status === 'late').length;
-    
-    // Calculate percentage only if there are records
-    const percent = records.length > 0 ? ((present / records.length) * 100).toFixed(1) : '—';
-    
-    // Assignment submitted: check if any resource for this class has a submission for this student with status 'Submitted'
-    let assignmentSubmitted = 'No';
-    if (studentClass) {
-      const classResources = resources.filter(r => Number(r.classId) === studentClass.id);
-      for (const res of classResources) {
-        if (res.submissions && res.submissions.some(sub => sub.studentId === s.id && sub.status === 'Submitted')) {
-          assignmentSubmitted = 'Yes';
-          break;
-        }
-      }
-    }
-    
-    return {
-      id: s.id,
-      name: s.name,
-      gender: s.gender,
-      className: studentClass ? `${studentClass.subject} ${studentClass.grade}${studentClass.section}` : '',
-      present,
-      absent,
-      late,
-      percent,
-      assignmentSubmitted,
-      // Add specific date attendance status if date filter is applied
-      dateStatus: null, // dateFilter is removed, so this will always be null
-    };
-  });
-
-  // --- Subject/Teacher Attendance Summary Cards ---
-  // Build a summary for each class (subject/teacher)
   const classSummaries = useMemo(() => {
     return classes.map(cls => {
       // Find teacher for this class (by subject)
@@ -223,26 +180,6 @@ function Report() {
     });
   }, [classes, attendanceRecords]);
 
-  // Helper: get students for a class
-  function getStudentsForClass(classId) {
-    const cls = classes.find(c => c.id === classId);
-    if (!cls) return [];
-    // Assume studentIds is an array of student IDs in the class
-    return students.filter(s => (cls.studentIds || []).includes(s.id));
-  }
-  // Helper: get attendance summary for a student in a class
-  function getStudentAttendanceSummary(student, classId) {
-    let records = attendanceRecords.filter(r => r.classId === classId && r.studentId === student.id);
-    const present = records.filter(r => r.status === 'present').length;
-    const absent = records.filter(r => r.status === 'absent').length;
-    const late = records.filter(r => r.status === 'late').length;
-    const percent = records.length > 0 ? ((present / records.length) * 100).toFixed(1) : '—';
-    return { present, absent, late, percent };
-  }
-  function getStudentStatusOnDate(student, classId, date) {
-    const rec = attendanceRecords.find(r => r.classId === classId && r.studentId === student.id && r.date === date);
-    return rec ? rec.status : '—';
-  }
   return (
     <div className="report-page" style={{ maxWidth: 1100, margin: '0 auto', padding: 24 }}>
       <h2 className="section-title report-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0 }}>
@@ -306,25 +243,8 @@ export default Report;
 function ClassAttendanceModalContent({ classId, students, classes, attendanceRecords }) {
   const [date, setDate] = useState('');
   const cls = classes.find(c => c.id === classId);
-  const filteredStudents = getStudentsForClass(classId);
+  const filteredStudents = students.filter(s => (cls ? cls.studentIds || [] : []).includes(s.id));
 
-  function getStudentsForClass(classId) {
-    const cls = classes.find(c => c.id === classId);
-    if (!cls) return [];
-    return students.filter(s => (cls.studentIds || []).includes(s.id));
-  }
-  function getStudentAttendanceSummary(student, classId) {
-    let records = attendanceRecords.filter(r => r.classId === classId && r.studentId === student.id);
-    const present = records.filter(r => r.status === 'present').length;
-    const absent = records.filter(r => r.status === 'absent').length;
-    const late = records.filter(r => r.status === 'late').length;
-    const percent = records.length > 0 ? ((present / records.length) * 100).toFixed(1) : '—';
-    return { present, absent, late, percent };
-  }
-  function getStudentStatusOnDate(student, classId, date) {
-    const rec = attendanceRecords.find(r => r.classId === classId && r.studentId === student.id && r.date === date);
-    return rec ? rec.status : '—';
-  }
   return (
     <div>
       <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
@@ -360,8 +280,11 @@ function ClassAttendanceModalContent({ classId, students, classes, attendanceRec
               <tr><td colSpan={date ? 4 : 7} style={{ textAlign: 'center', color: '#fff', padding: 12 }}>No students found</td></tr>
             ) : (
               filteredStudents.map(s => {
-                const summary = getStudentAttendanceSummary(s, classId);
-                const status = date ? getStudentStatusOnDate(s, classId, date) : null;
+                const present = attendanceRecords.filter(r => r.classId === classId && r.studentId === s.id && r.status === 'present').length;
+                const absent = attendanceRecords.filter(r => r.classId === classId && r.studentId === s.id && r.status === 'absent').length;
+                const late = attendanceRecords.filter(r => r.classId === classId && r.studentId === s.id && r.status === 'late').length;
+                const percent = attendanceRecords.filter(r => r.classId === classId && r.studentId === s.id).length > 0 ? ((present / attendanceRecords.filter(r => r.classId === classId && r.studentId === s.id).length) * 100).toFixed(1) : '—';
+                const status = date ? attendanceRecords.find(r => r.classId === classId && r.studentId === s.id && r.date === date)?.status : null;
                 return (
                   <tr key={s.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.12)', background: '#3a4664' }}>
                     <td style={{ padding: 12, color: '#fff' }}>{s.name}</td>
@@ -390,10 +313,10 @@ function ClassAttendanceModalContent({ classId, students, classes, attendanceRec
                       </td>
                     ) : (
                       <>
-                        <td style={{ textAlign: 'center', padding: 12, color: '#fff' }}>{summary.present}</td>
-                        <td style={{ textAlign: 'center', padding: 12, color: '#fff' }}>{summary.absent}</td>
-                        <td style={{ textAlign: 'center', padding: 12, color: '#fff' }}>{summary.late}</td>
-                        <td style={{ textAlign: 'center', padding: 12, color: '#fff' }}>{summary.percent === '—' ? '—' : `${summary.percent}%`}</td>
+                        <td style={{ textAlign: 'center', padding: 12, color: '#fff' }}>{present}</td>
+                        <td style={{ textAlign: 'center', padding: 12, color: '#fff' }}>{absent}</td>
+                        <td style={{ textAlign: 'center', padding: 12, color: '#fff' }}>{late}</td>
+                        <td style={{ textAlign: 'center', padding: 12, color: '#fff' }}>{percent === '—' ? '—' : `${percent}%`}</td>
                       </>
                     )}
                   </tr>

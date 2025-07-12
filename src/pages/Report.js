@@ -73,7 +73,6 @@ const fakeTeachers = [
 ];
 
 function Report() {
-  const [search, setSearch] = useState('');
   const [selectedClassId, setSelectedClassId] = useState(null);
 
   // Live state for students, classes, attendance, resources
@@ -155,9 +154,6 @@ function Report() {
   // For now, we'll assume all classes are relevant for the teacher.
   // If a teacher's specific classes are needed, this logic needs to be re-introduced.
   // For now, we'll just filter by search and class/section filters.
-
-  // Filter by search
-  relevantStudents = relevantStudents.filter(s => s.name.toLowerCase().includes(search.toLowerCase()));
 
   // Filter by class (subject+grade+section) text
   // Filter by section text
@@ -308,10 +304,9 @@ function Report() {
 export default Report;
 
 function ClassAttendanceModalContent({ classId, students, classes, attendanceRecords }) {
-  const [search, setSearch] = useState('');
   const [date, setDate] = useState('');
   const cls = classes.find(c => c.id === classId);
-  const filteredStudents = getStudentsForClass(classId).filter(s => s.name.toLowerCase().includes(search.toLowerCase()));
+  const filteredStudents = getStudentsForClass(classId);
 
   function getStudentsForClass(classId) {
     const cls = classes.find(c => c.id === classId);
@@ -333,13 +328,6 @@ function ClassAttendanceModalContent({ classId, students, classes, attendanceRec
   return (
     <div>
       <div style={{ display: 'flex', gap: 12, marginBottom: 16, alignItems: 'center' }}>
-        <input
-          className="input"
-          style={{ maxWidth: 220 }}
-          placeholder="Search student name..."
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-        />
         <input
           className="input"
           type="date"

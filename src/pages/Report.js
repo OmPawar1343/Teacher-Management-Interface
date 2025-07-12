@@ -102,10 +102,6 @@ function Report() {
     });
     return arr;
   });
-  const [resources, setResources] = useState(() => {
-    const saved = localStorage.getItem('resources');
-    return saved ? JSON.parse(saved) : [];
-  });
 
   // Filter state for class and section (now as text inputs)
   // Listen for localStorage changes (even from other tabs)
@@ -134,8 +130,6 @@ function Report() {
       } else {
         setAttendanceRecords([]);
       }
-      const savedResources = localStorage.getItem('resources');
-      setResources(savedResources ? JSON.parse(savedResources) : []);
     }
     window.addEventListener('storage', handleStorage);
     // Also poll for changes in the same tab
@@ -147,7 +141,6 @@ function Report() {
   }, []);
 
   // Get students for teacher or admin
-  let relevantStudents = students;
   // The user prop was removed, so we'll just use the classes state directly
   // to determine which classes are relevant for the teacher.
   // This part of the logic needs to be re-evaluated based on the new_code.

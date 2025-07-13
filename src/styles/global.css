@@ -185,7 +185,7 @@ body.dark .dashboard-page,
 body.dark .students-page,
 body.dark .classes-page,
 body.dark .attendance-page,
-body.dark .profile-page,
+
 body.dark .settings-page,
 body.dark .resources-page,
 body.dark .subjects-page,
@@ -593,78 +593,7 @@ body.dark .badge {
   outline-offset: 2px;
 } 
 
-/* Profile Page */
-.profile-page {
-  max-width: 520px;
-  margin: 0 auto;
-  background: transparent;
-  border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  padding: 2.5rem 2rem 2rem 2rem;
-}
-.profile-section {
-  display: flex;
-  gap: 2.5rem;
-  align-items: flex-start;
-}
-.profile-avatar-block {
-  flex-shrink: 0;
-}
-.profile-avatar-label {
-  cursor: pointer;
-  display: block;
-}
-.profile-avatar {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  border: 2px solid #e5e7eb;
-  background: #f3f4f6;
-  display: block;
-}
-.profile-avatar-placeholder {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: #e0e7ff;
-  color: #2563eb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 1.1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  border: 2px solid #e5e7eb;
-}
-.profile-form {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-.profile-form-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-.profile-form-actions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.2rem;
-}
-
-@media (max-width: 700px) {
-  .profile-section {
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: stretch;
-  }
-  .profile-page {
-    padding: 1.5rem 0.7rem 1.5rem 0.7rem;
-  }
-} 
+ 
 
 /* Classes Page */
 .classes-page {

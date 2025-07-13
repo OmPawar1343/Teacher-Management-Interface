@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import TopBar from './components/TopBar';
 import Dashboard from './pages/Dashboard';
-import Profile from './pages/Profile';
 import Classes from './pages/Classes';
 import Attendance from './pages/Attendance';
 import Students from './pages/Students';
@@ -20,7 +19,6 @@ function App() {
 
   let content;
   if (page === 'dashboard') content = <Dashboard onNavigate={setPage} />;
-  else if (page === 'profile') content = <Profile />;
   else if (page === 'students') content = <Students />;
   else if (page === 'classes') content = <Classes />;
   else if (page === 'attendance') content = <Attendance />;

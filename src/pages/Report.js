@@ -225,7 +225,7 @@ function ClassAttendanceModalContent({ classId, students, classes, attendanceRec
                     <td style={{ padding: 12, color: '#fff' }}>{cls ? cls.section : ''}</td>
                     {date ? (
                       <td style={{ textAlign: 'center', padding: 12 }}>
-                        {status !== '—' ? (
+                        {status ? (
                           <span style={{
                             padding: '4px 8px',
                             borderRadius: '4px',
@@ -242,7 +242,15 @@ function ClassAttendanceModalContent({ classId, students, classes, attendanceRec
                           }}>
                             {status.charAt(0).toUpperCase() + status.slice(1)}
                           </span>
-                        ) : <span style={{ color: '#fff' }}>—</span>}
+                        ) : (
+                          <span style={{ 
+                            color: '#ffa500', 
+                            fontStyle: 'italic',
+                            fontSize: '12px'
+                          }}>
+                            No attendance data for this date
+                          </span>
+                        )}
                       </td>
                     ) : (
                       <>

@@ -5,7 +5,6 @@ import Classes from './pages/Classes';
 import Attendance from './pages/Attendance';
 import Students from './pages/Students';
 import CalendarPage from './pages/Calendar';
-import Resources from './pages/Resources';
 import Report from './pages/Report';
 import Teachers from './pages/Teachers';
 import Schedule from './pages/Schedule';
@@ -23,7 +22,6 @@ function App() {
   else if (page === 'classes') content = <Classes />;
   else if (page === 'attendance') content = <Attendance />;
   else if (page === 'calendar') content = <CalendarPage />;
-  else if (page === 'resources') content = <Resources />;
   else if (page === 'report') content = <Report />;
   else if (page === 'teachers') content = <Teachers />;
   else if (page === 'schedule') content = <Schedule />;

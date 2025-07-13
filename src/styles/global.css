@@ -187,7 +187,7 @@ body.dark .classes-page,
 body.dark .attendance-page,
 
 body.dark .settings-page,
-body.dark .resources-page,
+
 body.dark .subjects-page,
 body.dark .messages-page,
 body.dark .schedule-page,
@@ -234,7 +234,7 @@ body.dark .card,
 body.dark .students-table,
 body.dark .classes-table,
 body.dark .attendance-table,
-body.dark .resources-table,
+
 body.dark .subjects-table,
 body.dark .events-table {
   background: var(--color-surface) !important;

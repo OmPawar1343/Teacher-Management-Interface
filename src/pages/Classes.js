@@ -3,10 +3,10 @@ import Button from '../components/Button';
 import Modal from '../components/Modal';
 
 const initialClasses = [
-  { id: 1, subject: 'Mathematics', grade: '10', section: 'A', students: 32, teachers: [1] },
-  { id: 2, subject: 'Science', grade: '9', section: 'B', students: 28, teachers: [3] },
-  { id: 3, subject: 'English', grade: '10', section: 'C', students: 30, teachers: [2] },
-  { id: 4, subject: 'History', grade: '8', section: 'A', students: 25, teachers: [4] },
+  { id: 1, subject: 'Mathematics', grade: '10', section: 'A', students: 5, teachers: [1] },
+  { id: 2, subject: 'Science', grade: '10', section: 'A', students: 5, teachers: [3] },
+  { id: 3, subject: 'English', grade: '10', section: 'A', students: 5, teachers: [2] },
+  { id: 4, subject: 'History', grade: '10', section: 'A', students: 5, teachers: [4] },
 ];
 export { initialClasses };
 

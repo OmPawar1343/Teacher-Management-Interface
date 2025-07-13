@@ -129,26 +129,6 @@ function TopBar({ current, onNavigate, unreadMessages = 0, onLogout }) {
           ))}
         </div>
       )}
-      <style jsx>{`
-        @keyframes fadeInMenu {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .topbar-logo {
-          user-select: none;
-        }
-        .topbar-link.active {
-          background: #fff2 !important;
-        }
-        .topbar-link:focus {
-          outline: 2px solid #60a5fa;
-        }
-        @media (max-width: 768px) {
-          .topbar-logo {
-            font-size: 22px !important;
-          }
-        }
-      `}</style>
     </header>
   );
 }

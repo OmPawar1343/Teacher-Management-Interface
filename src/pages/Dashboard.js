@@ -68,7 +68,7 @@ function Dashboard({ onNavigate }) {
         <span role="img" aria-label="Dashboard" style={{ marginRight: 18, fontSize: 55, verticalAlign: 'middle' }}>🏠</span>
         Dashboard
       </h1>
-      {/* Summary cards (clickable) */}
+          {/* Summary cards (clickable) */}
       <div style={{ display: 'flex', gap: 24, marginBottom: 32, padding: '32px', justifyContent: 'center' }} className="dashboard-cards-row">
         <div style={{ flex: 1, maxWidth: '200px', width: '100%', cursor: 'pointer' }} onClick={() => onNavigate && onNavigate('teachers')}><Card title="Teachers" value={teachers.length} icon={<span style={{ fontSize: 32 }}>👨‍🏫</span>} /></div>
         <div style={{ flex: 1, maxWidth: '200px', width: '100%', cursor: 'pointer' }} onClick={() => onNavigate && onNavigate('students')}><Card title="Students" value={students.length} icon={<span style={{ fontSize: 32 }}>🧑‍🎓</span>} /></div>
@@ -77,14 +77,6 @@ function Dashboard({ onNavigate }) {
         <div style={{ flex: 1, maxWidth: '200px', width: '100%', cursor: 'pointer' }} onClick={() => onNavigate && onNavigate('schedule')}><Card title="Schedule" value={scheduleEventsCount} icon={<span style={{ fontSize: 32 }}>️📅</span>} /></div>
         <div style={{ flex: 1, maxWidth: '200px', width: '100%', cursor: 'pointer' }} onClick={() => onNavigate && onNavigate('report')}><Card title="Report" value={reportCount} icon={<span style={{ fontSize: 32 }}>📊</span>} /></div>
       </div>
-      <style jsx>{`
-        @media (max-width: 700px) {
-          .dashboard-cards-row {
-            flex-direction: column !important;
-            align-items: center !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }

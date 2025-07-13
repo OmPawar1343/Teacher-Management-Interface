@@ -87,7 +87,7 @@ function App() {
             exit={{ opacity: 0 }}
             style={{ width: '100%', height: '100%' }}
           >
-            <div className="app-layout">
+    <div className="app-layout">
               <TopBar current={page} onNavigate={setPage} onLogout={() => setPage('dashboard')} />
               <main className="main-content">
                 <div className="animated-bg-particles" aria-hidden="true">

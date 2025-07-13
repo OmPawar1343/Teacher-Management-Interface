@@ -867,7 +867,7 @@ body.dark .badge {
 .students-table-wrap {
   scrollbar-color: #223046 #181c2a;
   scrollbar-width: thin;
-}
+} 
 
 /* Attendance Analytics Page */
 .attendance-analytics-page {
@@ -1223,6 +1223,52 @@ body.dark .particle5 {
 .classes-table-scroll {
   scrollbar-color: #223046 #181c2a;
   scrollbar-width: thin;
+}
+
+/* TopBar specific styles */
+@keyframes fadeInMenu {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.topbar-logo {
+  user-select: none;
+}
+
+.topbar-link.active {
+  background: #fff2 !important;
+}
+
+.topbar-link:focus {
+  outline: 2px solid #60a5fa;
+}
+
+@media (max-width: 768px) {
+  .topbar-logo {
+    font-size: 22px !important;
+  }
+}
+
+/* Input placeholder styles */
+input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+input::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+input:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Dashboard responsive styles */
+@media (max-width: 700px) {
+  .dashboard-cards-row {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
 } 
 
 .dashboard-title-splash {

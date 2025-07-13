@@ -267,21 +267,6 @@ function Students() {
             </button>
           </div>
         )}
-        
-        <style jsx>{`
-          input::placeholder {
-            color: rgba(255, 255, 255, 0.7) !important;
-          }
-          input::-webkit-input-placeholder {
-            color: rgba(255, 255, 255, 0.7) !important;
-          }
-          input::-moz-placeholder {
-            color: rgba(255, 255, 255, 0.7) !important;
-          }
-          input:-ms-input-placeholder {
-            color: rgba(255, 255, 255, 0.7) !important;
-          }
-        `}</style>
       </div>
       <div className="students-table-wrap" style={{ background: 'rgba(255,255,255,0.08)', borderRadius: 10, boxShadow: '0 1px 6px rgba(0,0,0,0.04)' }}>
         <table className="students-table">

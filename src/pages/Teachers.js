@@ -175,20 +175,6 @@ function Teachers() {
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
-        <style jsx>{`
-          input::placeholder {
-            color: rgba(255, 255, 255, 0.7) !important;
-          }
-          input::-webkit-input-placeholder {
-            color: rgba(255, 255, 255, 0.7) !important;
-          }
-          input::-moz-placeholder {
-            color: rgba(255, 255, 255, 0.7) !important;
-          }
-          input:-ms-input-placeholder {
-            color: rgba(255, 255, 255, 0.7) !important;
-          }
-        `}</style>
       </div>
       <div className="teacher-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem', marginTop: '1.5rem' }}>
         {filteredTeachers.length === 0 ? (

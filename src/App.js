@@ -37,9 +37,9 @@ function App() {
         {!showMain ? (
           <motion.div
             key="splash"
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 0.7 } }}
+            initial={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, scale: 1.03, filter: 'blur(4px)', transition: { duration: 0.4, ease: 'easeInOut' } }}
             style={{
               minHeight: '100vh',
               width: '100vw',
@@ -78,8 +78,8 @@ function App() {
         ) : (
           <motion.div
             key="main"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { duration: 0.7 } }}
+            initial={{ opacity: 0, scale: 0.99 }}
+            animate={{ opacity: 1, scale: 1, transition: { duration: 0.4, ease: 'easeOut' } }}
             exit={{ opacity: 0 }}
             style={{ width: '100%', height: '100%' }}
           >

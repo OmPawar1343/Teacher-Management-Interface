@@ -7,6 +7,7 @@ const initialClasses = [
   { id: 2, subject: 'Physics', grade: '10', section: 'A', students: 6, teachers: [3] },
   { id: 3, subject: 'English', grade: '10', section: 'A', students: 6, teachers: [2] },
   { id: 4, subject: 'History', grade: '10', section: 'A', students: 6, teachers: [4] },
+  { id: 5, subject: 'Chemistry', grade: '10', section: 'A', students: 6, teachers: [5] },
 ];
 export { initialClasses };
 

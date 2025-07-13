@@ -124,14 +124,3 @@ A modern, glassmorphism-style Teacher Management Interface built with React, fea
 - [x] Production-ready build
 
 ---
-
-## 📬 How to Submit
-
-1. Share this repository link: https://github.com/OmPawar1343/Teacher-Management-Interface
-2. Include the live demo URL: https://teacher-management-systen.netlify.app/
-3. Include the Loom video link: https://www.loom.com/share/cd3522d9cf0c4e8a9b4b717be1f3f5af?sid=09860544-62d0-4530-bdc8-25af230de1f0
-4. Ensure all code is committed and pushed
-
----
-
-For any questions, please refer to the Loom video or open an issue in the repository.

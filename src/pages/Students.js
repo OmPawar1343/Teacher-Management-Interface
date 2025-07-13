@@ -6,10 +6,10 @@ import Papa from 'papaparse';
 const initialStudents = [
   { id: 1, name: 'Rohan Mehta', gender: 'Male', roll: 1, grade: '10', section: 'A' },
   { id: 2, name: 'Sneha Kapoor', gender: 'Female', roll: 2, grade: '10', section: 'A' },
-  { id: 3, name: 'Karan Desai', gender: 'Male', roll: 3, grade: '9', section: 'B' },
-  { id: 4, name: 'Anjali Nair', gender: 'Female', roll: 4, grade: '9', section: 'B' },
-  { id: 5, name: 'Pooja Sethi', gender: 'Female', roll: 5, grade: '10', section: 'C' },
-  { id: 6, name: 'Arjun Malhotra', gender: 'Male', roll: 6, grade: '10', section: 'C' },
+  { id: 3, name: 'Karan Desai', gender: 'Male', roll: 3, grade: '10', section: 'A' },
+  { id: 4, name: 'Anjali Nair', gender: 'Female', roll: 4, grade: '10', section: 'A' },
+  { id: 5, name: 'Pooja Sethi', gender: 'Female', roll: 5, grade: '10', section: 'A' },
+  { id: 6, name: 'Arjun Malhotra', gender: 'Male', roll: 6, grade: '10', section: 'A' },
 ];
 export { initialStudents };
 
@@ -91,6 +91,8 @@ function Students() {
           id: Date.now() + i,
           name: row.name || row.Name || '',
           gender: row.gender || row.Gender || '',
+          grade: row.grade || row.Grade || '10',
+          section: row.section || row.Section || 'A',
           roll: Number(row.roll || row.Roll || row['Roll No'] || students.length + 1 + i),
         })).filter(r => r.name && r.gender);
         if (imported.length === 0) {
@@ -373,8 +375,8 @@ function Students() {
 function StudentFormModal({ student, onSave, onClose }) {
   const [name, setName] = useState(student ? student.name : '');
   const [gender, setGender] = useState(student ? student.gender : '');
-  const [grade, setGrade] = useState(student ? student.grade : '');
-  const [section, setSection] = useState(student ? student.section : '');
+  const [grade, setGrade] = useState(student ? student.grade : '10');
+  const [section, setSection] = useState(student ? student.section : 'A');
   const [error, setError] = useState('');
 
   const handleSubmit = (e) => {

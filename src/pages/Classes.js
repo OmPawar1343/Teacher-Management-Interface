@@ -4,7 +4,7 @@ import Modal from '../components/Modal';
 
 const initialClasses = [
   { id: 1, subject: 'Mathematics', grade: '10', section: 'A', students: 6, teachers: [1] },
-  { id: 2, subject: 'Science', grade: '10', section: 'A', students: 6, teachers: [3] },
+  { id: 2, subject: 'Physics', grade: '10', section: 'A', students: 6, teachers: [3] },
   { id: 3, subject: 'English', grade: '10', section: 'A', students: 6, teachers: [2] },
   { id: 4, subject: 'History', grade: '10', section: 'A', students: 6, teachers: [4] },
 ];

@@ -79,6 +79,26 @@ function Students() {
     URL.revokeObjectURL(url);
   };
 
+  // Reset all students to 10A
+  const resetToDefaultClass = () => {
+    const updatedStudents = students.map(student => ({
+      ...student,
+      grade: '10',
+      section: 'A'
+    }));
+    setStudents(updatedStudents);
+    alert('All students have been reset to class 10A');
+  };
+
+  // Reset to initial data (clear localStorage)
+  const resetToInitialData = () => {
+    if (window.confirm('This will reset all students to the initial data. Are you sure?')) {
+      localStorage.removeItem('students');
+      setStudents(initialStudents);
+      alert('Students have been reset to initial data (all in 10A)');
+    }
+  };
+
   // CSV Import
   const handleImportCSV = (e) => {
     const file = e.target.files[0];
@@ -266,6 +286,54 @@ function Students() {
               onMouseLeave={(e) => e.target.style.background = 'none'}
             >
               📥 Import CSV
+            </button>
+            <button
+              onClick={() => {
+                resetToDefaultClass();
+                setShowMenu(false);
+              }}
+              style={{
+                width: '100%',
+                padding: '12px 16px',
+                background: 'none',
+                border: 'none',
+                color: '#fff',
+                textAlign: 'left',
+                cursor: 'pointer',
+                fontSize: '14px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                transition: 'background 0.2s ease'
+              }}
+              onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.1)'}
+              onMouseLeave={(e) => e.target.style.background = 'none'}
+            >
+              🔄 Reset to 10A
+            </button>
+            <button
+              onClick={() => {
+                resetToInitialData();
+                setShowMenu(false);
+              }}
+              style={{
+                width: '100%',
+                padding: '12px 16px',
+                background: 'none',
+                border: 'none',
+                color: '#fff',
+                textAlign: 'left',
+                cursor: 'pointer',
+                fontSize: '14px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                transition: 'background 0.2s ease'
+              }}
+              onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.1)'}
+              onMouseLeave={(e) => e.target.style.background = 'none'}
+            >
+              🗑️ Reset to Initial Data
             </button>
           </div>
         )}

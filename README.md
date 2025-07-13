@@ -10,6 +10,12 @@ A modern, glassmorphism-style Teacher Management Interface built with React, fea
 
 ---
 
+## ⚠️ Important Notice
+
+**📝 Attendance Tracking Notice**: At the initial stage, attendance tracking is configured for **Class 10A** only. All students are defaulted to Class 10A, and attendance functionality works specifically for this class. If you need to track attendance for other classes, please add them through the Classes section first.
+
+---
+
 ## 📹 Loom Video Walkthrough
 
 [Loom Video: Code Walkthrough, Features, and Design Decisions](https://www.loom.com/share/cd3522d9cf0c4e8a9b4b717be1f3f5af?sid=09860544-62d0-4530-bdc8-25af230de1f0)

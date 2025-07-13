@@ -123,20 +123,6 @@ function Classes() {
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
-        <style jsx>{`
-          input::placeholder {
-            color: rgba(255, 255, 255, 0.7) !important;
-          }
-          input::-webkit-input-placeholder {
-            color: rgba(255, 255, 255, 0.7) !important;
-          }
-          input::-moz-placeholder {
-            color: rgba(255, 255, 255, 0.7) !important;
-          }
-          input:-ms-input-placeholder {
-            color: rgba(255, 255, 255, 0.7) !important;
-          }
-        `}</style>
       </div>
       <div
         className="classes-table-scroll"

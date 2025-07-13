@@ -189,28 +189,44 @@ function ClassAttendanceModalContent({ classId, students, classes, attendanceRec
           onChange={e => setDate(e.target.value)}
         />
       </div>
-      <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: 400, minWidth: 700 }}>
-        <table className="attendance-details-table" style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 8, background: '#3a4664', borderRadius: 12, overflow: 'hidden', minWidth: 700 }}>
+      <div style={{ 
+        overflowX: 'auto', 
+        overflowY: 'auto', 
+        maxHeight: 400, 
+        minWidth: 300,
+        maxWidth: '100vw',
+        WebkitOverflowScrolling: 'touch'
+      }}>
+        <table className="attendance-details-table" style={{ 
+          width: '100%', 
+          borderCollapse: 'collapse', 
+          marginBottom: 8, 
+          background: '#3a4664', 
+          borderRadius: 12, 
+          overflow: 'hidden', 
+          minWidth: 600,
+          fontSize: '14px'
+        }}>
           <thead style={{ background: '#394362' }}>
             <tr>
-              <th style={{ textAlign: 'left', padding: 12, fontWeight: 600, color: '#fff' }}>Name</th>
-              <th style={{ textAlign: 'left', padding: 12, fontWeight: 600, color: '#fff' }}>Class</th>
-              <th style={{ textAlign: 'left', padding: 12, fontWeight: 600, color: '#fff' }}>Section</th>
+              <th style={{ textAlign: 'left', padding: '8px 12px', fontWeight: 600, color: '#fff', fontSize: '13px', whiteSpace: 'nowrap' }}>Name</th>
+              <th style={{ textAlign: 'left', padding: '8px 12px', fontWeight: 600, color: '#fff', fontSize: '13px', whiteSpace: 'nowrap' }}>Class</th>
+              <th style={{ textAlign: 'left', padding: '8px 12px', fontWeight: 600, color: '#fff', fontSize: '13px', whiteSpace: 'nowrap' }}>Section</th>
               {date ? (
-                <th style={{ textAlign: 'center', padding: 12, fontWeight: 600, color: '#fff' }}>Status ({date})</th>
+                <th style={{ textAlign: 'center', padding: '8px 12px', fontWeight: 600, color: '#fff', fontSize: '13px', whiteSpace: 'nowrap' }}>Status ({date})</th>
               ) : (
                 <>
-                  <th style={{ textAlign: 'center', padding: 12, fontWeight: 600, color: '#fff' }}>Present</th>
-                  <th style={{ textAlign: 'center', padding: 12, fontWeight: 600, color: '#fff' }}>Absent</th>
-                  <th style={{ textAlign: 'center', padding: 12, fontWeight: 600, color: '#fff' }}>Late</th>
-                  <th style={{ textAlign: 'center', padding: 12, fontWeight: 600, color: '#fff' }}>% Present</th>
+                  <th style={{ textAlign: 'center', padding: '8px 12px', fontWeight: 600, color: '#fff', fontSize: '13px', whiteSpace: 'nowrap' }}>Present</th>
+                  <th style={{ textAlign: 'center', padding: '8px 12px', fontWeight: 600, color: '#fff', fontSize: '13px', whiteSpace: 'nowrap' }}>Absent</th>
+                  <th style={{ textAlign: 'center', padding: '8px 12px', fontWeight: 600, color: '#fff', fontSize: '13px', whiteSpace: 'nowrap' }}>Late</th>
+                  <th style={{ textAlign: 'center', padding: '8px 12px', fontWeight: 600, color: '#fff', fontSize: '13px', whiteSpace: 'nowrap' }}>% Present</th>
                 </>
               )}
             </tr>
           </thead>
           <tbody>
             {filteredStudents.length === 0 ? (
-              <tr><td colSpan={date ? 4 : 7} style={{ textAlign: 'center', color: '#fff', padding: 12 }}>No students found</td></tr>
+              <tr><td colSpan={date ? 4 : 7} style={{ textAlign: 'center', color: '#fff', padding: '12px 8px', fontSize: '13px' }}>No students found</td></tr>
             ) : (
               filteredStudents.map(s => {
                 const present = attendanceRecords.filter(r => r.classId === classId && r.studentId === s.id && r.status === 'present').length;
@@ -220,16 +236,16 @@ function ClassAttendanceModalContent({ classId, students, classes, attendanceRec
                 const status = date ? attendanceRecords.find(r => r.classId === classId && r.studentId === s.id && r.date === date)?.status : null;
                 return (
                   <tr key={s.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.12)', background: '#3a4664' }}>
-                    <td style={{ padding: 12, color: '#fff' }}>{s.name}</td>
-                    <td style={{ padding: 12, color: '#fff' }}>{cls ? cls.grade : ''}</td>
-                    <td style={{ padding: 12, color: '#fff' }}>{cls ? cls.section : ''}</td>
+                    <td style={{ padding: '8px 12px', color: '#fff', fontSize: '13px', whiteSpace: 'nowrap' }}>{s.name}</td>
+                    <td style={{ padding: '8px 12px', color: '#fff', fontSize: '13px', whiteSpace: 'nowrap' }}>{cls ? cls.grade : ''}</td>
+                    <td style={{ padding: '8px 12px', color: '#fff', fontSize: '13px', whiteSpace: 'nowrap' }}>{cls ? cls.section : ''}</td>
                     {date ? (
-                      <td style={{ textAlign: 'center', padding: 12 }}>
+                      <td style={{ textAlign: 'center', padding: '8px 12px' }}>
                         {status ? (
                           <span style={{
-                            padding: '4px 8px',
+                            padding: '4px 6px',
                             borderRadius: '4px',
-                            fontSize: '12px',
+                            fontSize: '11px',
                             fontWeight: '500',
                             backgroundColor:
                               status === 'present' ? '#dcfce7' :
@@ -238,7 +254,8 @@ function ClassAttendanceModalContent({ classId, students, classes, attendanceRec
                             color:
                               status === 'present' ? '#166534' :
                               status === 'absent' ? '#92400e' :
-                              status === 'late' ? '#92400e' : '#888'
+                              status === 'late' ? '#92400e' : '#888',
+                            whiteSpace: 'nowrap'
                           }}>
                             {status.charAt(0).toUpperCase() + status.slice(1)}
                           </span>
@@ -246,18 +263,19 @@ function ClassAttendanceModalContent({ classId, students, classes, attendanceRec
                           <span style={{ 
                             color: '#ffa500', 
                             fontStyle: 'italic',
-                            fontSize: '12px'
+                            fontSize: '11px',
+                            whiteSpace: 'nowrap'
                           }}>
-                            No attendance data for this date
+                            No data
                           </span>
                         )}
                       </td>
                     ) : (
                       <>
-                        <td style={{ textAlign: 'center', padding: 12, color: '#fff' }}>{present}</td>
-                        <td style={{ textAlign: 'center', padding: 12, color: '#fff' }}>{absent}</td>
-                        <td style={{ textAlign: 'center', padding: 12, color: '#fff' }}>{late}</td>
-                        <td style={{ textAlign: 'center', padding: 12, color: '#fff' }}>{percent === '—' ? '—' : `${percent}%`}</td>
+                        <td style={{ textAlign: 'center', padding: '8px 12px', color: '#fff', fontSize: '13px', whiteSpace: 'nowrap' }}>{present}</td>
+                        <td style={{ textAlign: 'center', padding: '8px 12px', color: '#fff', fontSize: '13px', whiteSpace: 'nowrap' }}>{absent}</td>
+                        <td style={{ textAlign: 'center', padding: '8px 12px', color: '#fff', fontSize: '13px', whiteSpace: 'nowrap' }}>{late}</td>
+                        <td style={{ textAlign: 'center', padding: '8px 12px', color: '#fff', fontSize: '13px', whiteSpace: 'nowrap' }}>{percent === '—' ? '—' : `${percent}%`}</td>
                       </>
                     )}
                   </tr>
